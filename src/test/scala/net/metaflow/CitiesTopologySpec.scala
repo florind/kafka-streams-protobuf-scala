@@ -32,7 +32,7 @@ class CitiesTopologySpec extends AnyFlatSpec with Matchers with ForAllTestContai
 
   val producer: Producer[lang.Long, City] = new KafkaProducer(kafkaProps, new LongSerializer(), new KafkaProtobufSerializer[City]())
 
-  "S S join" should "save" in {
+  "Cities list" should "filter in all data" in {
     val topology = new CitiesTopology()
     topology.topologyInit(container.bootstrapServers)
     val recordsCount = new DataGenerator().genAddressData(producer, INPUT_TOPIC)

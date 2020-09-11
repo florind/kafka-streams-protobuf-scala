@@ -1,7 +1,5 @@
 package net.metaflow
 
-import java.time.Duration
-
 import net.metaflow.CitiesTopology.{INPUT_TOPIC, OUTPUT_TOPIC}
 import net.metaflow.models.address.City
 import net.metaflow.protobuf.serde.KafkaProtobufSerde
@@ -21,11 +19,7 @@ class CitiesTopology {
     val topology = builder.build()
     val kafkaStreams = new KafkaStreams(topology, new Application().config(bootstrapServers))
     print(topology.describe)
-    kafkaStreams.start
-
-    sys.ShutdownHookThread {
-      kafkaStreams.close(Duration.ofSeconds(2))
-    }
+    kafkaStreams.start()
   }
 }
 
